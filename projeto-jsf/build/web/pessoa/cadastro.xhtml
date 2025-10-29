@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="jakarta.faces.facelets"
+                template="./../WEB-INF/template.xhtml"
+                xmlns:p="primefaces"
+                xmlns:h="jakarta.faces.html"
+                xmlns:f="jakarta.faces.core"
+                >
+
+    <ui:define name="content">
+        <h:form id="form" class="align-center"> 
+            <p:growl id="growl" showDetail="true" showSummary="true"/>
+            
+            <p:panelGrid columns="2" styleClass="tabular">
+
+                <h5>Nome:</h5>
+                <p:inputText id="nome" value="#{pessoaController.pessoa.nome}" />
+
+                <h5>Data de Nascimento:</h5>
+                <p:datePicker id="dataNascimento" value="#{pessoaController.pessoa.dataNascimento}" />
+
+                <h5>Número:</h5>
+                <p:spinner id="numero" value="#{pessoaController.pessoa.numero}" />
+
+                <h5>Salário:</h5>
+                <p:inputNumber id="salario"
+                               decimalSeparator=","
+                               thousandSeparator="."
+                               value="#{pessoaController.pessoa.salario}" />
+                <h5>Cargo AC:</h5>
+                <p:autoComplete 
+                    value=""
+                    completeMethod="#{pessoaController.buscarCargoPorNome()}"
+                    />
+                
+                <h5>Cargo:</h5>
+                <p:selectOneMenu value="#{pessoaController.pessoa.cargo}">
+                    <f:selectItem itemLabel="Selecione"
+                                  itemValue=""/>
+                    <f:selectItems value="#{cargoController.cargos}"
+                                   var="item"
+                                   itemLabel="#{item.nome}"
+                                   itemValue="#{item}"/>
+                </p:selectOneMenu>
+
+        </p:panelGrid>
+
+        <p:commandButton value= "SUBMETER" 
+             action= "#{pessoaController.cadastrar()}"
+             update="form"
+             id="sub-button"
+             />
+            
+        </h:form>
+    </ui:define>
+
+</ui:composition>

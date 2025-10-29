@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit this template
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="jakarta.faces.core">
+    <h:head>
+        <title>Ferramentas de Programação</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </h:head>
+    <h:body>
+        <h:form id="form"> 
+            <p:growl id="growl" showDetail="true" showSummary="true"/>
+            <p:dataTable 
+                id="idtabela"
+                reflow="true"
+                paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                currentPageReportTemplate="{startRecord}-{endRecord} de {totalRecords} registros"
+                rowsPerPageTemplate="5,10,{ShowAll|'Tudo'}"
+                paginatorPosition="bottom"
+                rows="5"
+                paginator="true"
+                var="pessoa"
+                value="#{pessoaController.pessoas}">
+                
+                <p:column headerText="ID">
+                    <h:outputText value="#{pessoa.id}"/>
+                </p:column>
+                <p:column headerText="Nome">
+                    <h:outputText value="#{pessoa.nome}"/>
+                </p:column>
+                <p:column headerText="Salario">
+                    <h:outputText value="#{pessoa.salario}">
+                        <f:convertNumber type="currency"/>          
+                    </h:outputText>
+                </p:column>
+                <p:column headerText="Data de nascimento">
+                    <h:outputText value="#{pessoa.dataNascimento}">
+                        <f:convertDateTime
+                                      pattern="dd/MM/yyyy"
+                                      type="localDate"/>          
+                    </h:outputText>
+                </p:column>
+                <p:column headerText="Numero">
+                    <h:outputText value="#{pessoa.numero}"/>
+                </p:column>
+                
+                <p:column headerText="Excluir">
+                    <p:commandButton icon="pi pi-trash"
+                                     action=
+                                     "#{pessoaController.excluirPessoa(pessoa)}"
+                                     update="form"
+                                     >                                      
+                    </p:commandButton>
+                </p:column>
+                
+            </p:dataTable>
+        
+            
+            <p:commandButton value="Menu"
+                             action="/index.xhtml" />
+        </h:form>
+    </h:body>
+</html>

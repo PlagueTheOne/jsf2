@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit this template
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Ferramentas de Programação</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </h:head>
+    <h:body>
+        <h:form id="form"> 
+            <p:growl id="growl" showDetail="true" showSummary="true"/>
+            
+            
+            <h5>Nome</h5>
+            <p:inputText id="nome" 
+                value="#{pessoaController.pessoa.nome}"/>
+            
+            <h5>Data De Nascimento</h5>
+            <p:datePicker id="basic"
+                          value="#{pessoaController.pessoa.dataNascimento}" />
+            <br></br>            
+            
+            <h5>Numero</h5>
+            <p:spinner id="numero"
+                       value="#{pessoaController.pessoa.numero}"/>
+            
+            <h5> Salario </h5>
+            <p:inputNumber id="salario"
+                           decimalSeparator=","
+                           thousandSeparator="."
+                           value="#{pessoaController.pessoa.salario}"/>
+            
+            <br></br>
+            
+            <h5>Botoes</h5>
+            <p:commandButton value= "SUBMETER" 
+                             action= "#{pessoaController.exibir()}"
+                             update="form"
+                         
+                             />
+            
+            
+            <p:commandButton value= " +1 "
+                             update="numero"
+                             action=
+                             "#{pessoaController.incrementar()}"
+                             />
+        
+            <p:commandButton value="Menu"
+                             action="/index.xhtml" />
+            
+        </h:form>
+    </h:body>
+</html>

@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="jakarta.faces.facelets"
+      xmlns:h="jakarta.faces.html"
+      xmlns:p="primefaces"
+      xmlns:f="jakarta.faces.core">
+
+    <body>
+
+        <ui:composition template="./../WEB-INF/template.xhtml">
+
+            <ui:define name="content">
+                <h:form id="form"> 
+                    <p:growl id="growl" showDetail="true" showSummary="true"/>
+                    <p:dataTable 
+                        id="idtabela"
+                        reflow="true"
+                        paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                        currentPageReportTemplate="{startRecord}-{endRecord} de {totalRecords} registros"
+                        rowsPerPageTemplate="5,10,{ShowAll|'Tudo'}"
+                        paginatorPosition="bottom"
+                        rows="5"
+                        paginator="true"
+                        var="pessoa"
+                        value="#{pessoaController.pessoas}">
+
+                        <p:column headerText="ID">
+                            <h:outputText value="#{pessoa.id}"/>
+                        </p:column>
+                        <p:column headerText="Nome">
+                            <h:outputText value="#{pessoa.nome}"/>
+                        </p:column>
+                        <p:column headerText="Salario">
+                            <h:outputText value="#{pessoa.salario}">
+                                <f:convertNumber type="currency"/>          
+                            </h:outputText>
+                        </p:column>
+                        <p:column headerText="Data de nascimento">
+                            <h:outputText value="#{pessoa.dataNascimento}">
+                                <f:convertDateTime
+                                              pattern="dd/MM/yyyy"
+                                              type="localDate"/>          
+                            </h:outputText>
+                        </p:column>
+                        <p:column headerText="Numero">
+                            <h:outputText value="#{pessoa.numero}"/>
+                        </p:column>
+
+                        <p:column headerText="Excluir">
+                            <p:commandButton icon="pi pi-trash"
+                                             action=
+                                             "#{pessoaController.excluirPessoa(pessoa)}"
+                                             update="form"
+                                             >                                      
+                            </p:commandButton>
+                        </p:column>
+
+                    </p:dataTable>
+
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
